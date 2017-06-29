@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Formspree tester</title>
+</head>
+<body>
+	<form id="contact-form" action="https://formspree.io/shuansiang92@gmail.com" method="POST">
+	  <input id="inputMessage" type="text" name="name" placeholder="message">
+	  <input id="inputEmail" type="email" name="_replyto" placeholder="email">
+	  <input type="submit" value="Send">
+	</form>
+	<script>
+		$('#contact-form').submit(function(e) {
+			var message = document.getElementById('inputMessage'),
+					email = document.getElementById('inputEmail');
+
+			if (!message.value || !email.value) {
+				alert('check');
+			} else {
+				$.ajax({
+					url: "https://formspree.io/shuansiang92@gmail.com",
+					method: "POST",
+					data: $(this).serialize(),
+					dataType: "json"
+				})
+				e.preventDefault();
+				$(this).get(0).reset();
+				alert('success');
+			}
+		});
+	</script>
+</body>
+</html>
